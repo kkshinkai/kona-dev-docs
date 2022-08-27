@@ -1,0 +1,5 @@
+# Ignore the desktop services store files on macOS.
+.DS_Store
+
+# Ignore the mdBook output directory.
+book

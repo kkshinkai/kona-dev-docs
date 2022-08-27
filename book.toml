@@ -1,0 +1,10 @@
+[book]
+authors = ["Kk Shinkai"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Kona Development Documentation"
+
+[output.html]
+fold.enable = true
+playground.runnable = false
