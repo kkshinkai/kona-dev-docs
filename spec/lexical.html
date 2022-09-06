@@ -135,6 +135,67 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="lexical-structure"><a class="header" href="#lexical-structure">Lexical Structure</a></h1>
+<h2 id="reserved-words"><a class="header" href="#reserved-words">Reserved Words</a></h2>
+<p>The following are the reserved words used in the Core. They may not (except <code>=</code>)
+be used as identifiers</p>
+<pre><code class="language-sml">and as case datatype do else end exception fn fun if in infix
+infixr let local nonfix of op open orelse rec then type val with
+withtype while ( ) [ ] { } , : ; ... _ | = =&gt; -&gt; #
+</code></pre>
+<h2 id="special-constants"><a class="header" href="#special-constants">Special Constants</a></h2>
+<h3 id="integer-constants"><a class="header" href="#integer-constants">Integer Constants</a></h3>
+<p>An integer constant (in decimal notation) is an optional negation symbol (<code>~</code>)
+followed by a non-empty sequence of decimal digits <code>0</code>,..,<code>9</code>.</p>
+<pre><code class="language-sml">0   (* 0: int *)
+42  (* -42: int *)
+~1  (* 0: int *)
+~   (* negative function: int -&gt; int *)
+~ 3 (* a negative function and an integer constant 3 *)
+</code></pre>
+<p>An integer constant (in hexadecimal notation) is an optional negation symbol
+followed by <code>0x</code> followed by a non-empty sequence of hexadecimal digits
+<code>0</code>,..,<code>9</code>, <code>a</code>,..,<code>f</code>. (<code>A</code>,..,<code>F</code> may be used as alternative for <code>a</code>,..,<code>f</code>.)</p>
+<pre><code class="language-sml">0x0      (* 0: int *)
+0xabcdef (* 11259375: int *)
+0xABCDEF (* 11259375: int *)
+0xAbCdEf (* 11259375: int *)
+~0x1     (* -1: int *)
+0x       (* 0: int and a variable named x *)
+~0x      (* -0: int and a variable named x *)
+</code></pre>
+<h3 id="word-constants"><a class="header" href="#word-constants">Word Constants</a></h3>
+<p>A word constant (in decimal notation) is <code>0w</code> followed by a non-empty sequence
+of decimal digits. A word constant (in hexadecimal notation) is <code>0wx</code> followed
+by a non-empty sequence of hexadecimal digits.</p>
+<pre><code class="language-sml">0w0        (* 0: word *)
+0w123      (* 123: word *)
+0w         (* 0: int and a variable named w *)
+~0w123     (* -0: int and a variable named w123 *)
+</code></pre>
+<h3 id="real-constants"><a class="header" href="#real-constants">Real Constants</a></h3>
+<p>A real constant is an integer constant in decimal notation, possibly followed by
+a point (<code>.</code>) and one or more decimal digits, possibly followed by an exponent
+symbol (<code>E</code> or <code>e</code>) and an integer constant in decimal notation; at least one of
+the optional parts must occur, hence no integer constant is a real constant.</p>
+<pre><code>0.7    (* 0.7: real *)
+3.32E5 (* 332000.0: real *)
+3E~7   (* 0.0000003: real *)
+23     (* 23: int *)
+.3     (* a dot `.` and an integer constant 3 *)
+4.E5   (* 4: int, a dot `.` and a variable named E5 *)
+1E2.0  (* a real constant 1E2, a dot `.` and an integer constant 0 *)
+</code></pre>
+<blockquote>
+<p>Note: There are two options for dealing with illegal source like <code>.3</code>:</p>
+<ol>
+<li>Lex it as a dot (<code>.</code>) and an integer constant <code>3</code>, the error will be
+reported by the parser later (because <code>.</code> is only allowed in qualified
+identifiers);</li>
+<li>Lex it as an invalid real constant token <code>0.3</code> and report the illegal
+literal error;</li>
+</ol>
+<p>We should choose the second option. It could provide better error messages.</p>
+</blockquote>
 
                     </main>
 
