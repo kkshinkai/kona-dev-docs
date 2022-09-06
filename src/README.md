@@ -1,7 +1,7 @@
 # Kona Development Documentation
 
-This is the development documentation for the [Kona] compiler. It describes the
-details of the language design and implementation.
+This is the development documentation for my Standard ML compiler: [Kona]. It
+describes the details of the compiler design and implementation.
 
 > **Note**: Kona is still in very early development, and the mechanisms
 > mentioned in the documentation may not yet be implemented in the compiler.
